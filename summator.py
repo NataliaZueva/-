@@ -13,3 +13,4 @@ while True:
     else:
         print('Сумма равна 0\nПрограмма завершена')
         break
+
