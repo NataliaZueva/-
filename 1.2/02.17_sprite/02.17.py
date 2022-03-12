@@ -63,7 +63,8 @@ def counter(x):
            
 def tkk():
     window = tk.Tk()
-    greeting = tk.Label(text="Game over", width=20,height=10)
+    greeting = tk.Label(text="Игра законченна", width=20,height=10)
+    greeting = tk.Label(text=("Со счётом: " + str(quantity)), width=20,height=10)
     greeting.pack()
     window.mainloop()
 
@@ -104,6 +105,14 @@ for i in range(3):
     lives.add(Live(H, W, 'live.png'),
              Live(H, W, 'live.png'))
 
+enemys = pg.sprite.Group()
+for i in range (3):
+    H+=size
+    lives.add(Enemy(random.randint(0,SCREEN_HEIGHT),"enemy.png"),
+    Enemy(random.randint(0,SCREEN_HEIGHT),"enemy.png"))
+
+    
+
 running = True 
 while running:
     
@@ -115,9 +124,19 @@ while running:
     cc="Ваш счет " + str(quantity)
     counter(cc)
     screen.blit(manikin.image, manikin.rect)
-    screen.blit(enemy.image,enemy.rect)
+    screen.blit(enemy.image, enemy.rect)
+    enemys.draw(screen)  
     lives.draw(screen)
     pg.display.flip()
+
+    keys=pg.key.get_pressed()
+    manikin.update(keys)
+    screen.fill(color)
+    enemy.update()
+    enemys.update()
+
+
+
 
     keys=pg.key.get_pressed()
     manikin.update(keys)
@@ -127,6 +146,7 @@ while running:
     if pg.sprite.collide_rect(manikin,enemy):
         running=False
         tkk()
+   
           
 pg.quit() 
  
