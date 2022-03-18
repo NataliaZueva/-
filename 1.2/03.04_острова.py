@@ -1,9 +1,12 @@
+import numpy as np
+
 def file_read(title):
     a=[]
     b=open(title,'r').readlines()
     for line in b:
         a.append([int(x) for x in line.split()])
     return a
+
 def fas(w, v):
     i1=len(v)  #строки
     j1=len(v[1])  #cтолбцы
@@ -16,24 +19,25 @@ def fas(w, v):
             print(i2, end=' ')
         print()
     return v
+
 def counter(i,j,i1,j1):
-    global v
+    global v, k
     save = v[i][j]
     v[i][j]=0
     v1=set()
     if save == 0:
         return v1
-    elif save !=0:  
+    elif save !=0:
       #влево
         if j-1>0 and save == v[i][j-1]:
-            v[i][j-1]=0
             v1 |= counter(i,j-1,i1,j1)
             v1.add((v[i][j-1],i,j-1))
+            v[i][j-1]=0
       #вверх
-        if i-1>0 and save == v[i-1][j]:
-            v[i-1][j]=0
+        if i-1<i1 and save == v[i-1][j]:
             v1 |= counter(i-1,j,i1,j1)
             v1.add((v[i-1][j],i-1,j))
+            v[i][j+1]=0
       #вправо
         if j+1<j1 and save == v[i][j+1]:
             v[i][j+1]=0
@@ -41,24 +45,20 @@ def counter(i,j,i1,j1):
             v1.add((v[i][j+1],i,j+1))
       #вниз
         if i+1<i1 and save == v[i+1][j]:
-            v[i+1][j]=0
+            v[i][j+1]=0
             v1 |= counter(i+1,j,i1,j1)
             v1.add((v[i+1][j],i+1,j))
-      #print(v)
+        #print(v)
+    if v1 != 0:
+        k+=1
     return v1
-for w in range (1, 10):
-    print ("Нахождение всех", w, ":")
-    fas(w, file_read("island.txt"))
-k=0
-v1=set()
 v=file_read("island.txt")
-i1=len(v)  #строки
-j1=len(v[1])  #cтолбцы
-for i in range(i1):
-  for j in range(j1):
-      counters = counter (i,j,i1,j1)
-      if counter != set():
-          k+=1
-      
-print("Всего острoвков", k)
-   
+
+lst = np.unique(v)
+print(lst)
+np.delete(lst,0)
+print(lst)
+
+a = np.arange(9)
+np.delete(a, xra[2:7])
+print(a)
