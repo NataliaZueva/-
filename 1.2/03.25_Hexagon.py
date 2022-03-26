@@ -22,3 +22,4 @@ class Hexagon:
 
 q = Hexagon(int(input("Введите радиус: ")))
 print("area", q.area())
+
