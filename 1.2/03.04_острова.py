@@ -1,4 +1,3 @@
-import numpy as np
 
 def file_read(title):
     a=[]
@@ -18,7 +17,9 @@ def fas(w, v):
         for i2 in i:
             print(i2, end=' ')
         print()
-    return v
+    return v 
+
+
 
 def counter(i,j,i1,j1):
     global v, k
@@ -54,11 +55,3 @@ def counter(i,j,i1,j1):
     return v1
 v=file_read("island.txt")
 
-lst = np.unique(v)
-print(lst)
-np.delete(lst,0)
-print(lst)
-
-a = np.arange(9)
-np.delete(a, xra[2:7])
-print(a)
