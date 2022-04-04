@@ -7,12 +7,46 @@ def read(title):
         for line in file:
             string.append(list(line.split(" ")))
     return string
+
 def adjacency_matrix(graph):
     matrix = []
     for i in range(1, len(graph)):
         matrix.append(list(map(int, graph[i][1:])))
     return matrix
-    
+
+def vertexes(graph):
+    string = []
+    v = []
+    for i in range(1):
+        string.append(list(graph[i][1:-1]))
+    for el in string:
+        for le in el:
+            v += [le]
+    return v
+
+def inverse_determinant(start, end):
+    global gra
+    a = []
+    b = []
+    for i in range(len(gra)):
+        if i == start:
+            a = gra[i]
+        if i == end:
+            b = gra[i]
+    return a, b
+
+def determinant():
+    global graph, gra
+    a, b = list(input('Ведите вершины начала и конца маршрута ').split())
+    end = -1
+    start = -1
+    for i in range(len(gra)):
+        if gra[i] == a:
+            start = i
+        if gra[i] == b:
+            end = i
+    return start, end
+
 def minimum(T, set):
     global m
     amin = -1 
@@ -35,13 +69,25 @@ def search():
         if start >= 0:
             set.add(start)
 
-graph = read('abc.txt')
-print("graph", "\n", graph, "\n")
-a = adjacency_matrix(graph)
-print("aaaaa", "\n", a)
+
+
+
+
+
+
+
+graph1 = read('abc.txt')
+graph = adjacency_matrix(graph1)
+gra = vertexes(graph1)
+start, end = determinant()
+a, b = inverse_determinant(start, end)
+#print("graph1", "\n", graph1, "\n")
+#print("graph", "\n", graph, "\n")
+#print("gra", "\n", gra, "\n")
+#print ("start, end", "\n", start, end, "\n")
+#print("a, b", "\n", a, b, "\n")
 
 N = len(graph)
-start, end = list(map(int,input('У вас всего ' + str(len(graph)) + ' вершины. Введите вершины начала и конца пути: ').split()))
 starts = start
 T = [m]*N 
 set = {start}
@@ -49,6 +95,6 @@ T[start] = 0
 M = [0]*N 
 search()
 print(T)
-print("От вершины", starts, "до вершины", end, "растояние", T[end:end+1])
+print("От вершины", a, "до вершины", b, "растояние", T[end:end+1])
 
 
