@@ -11,7 +11,7 @@ def read(title):
 def adjacency_matrix(graph):
     matrix = []
     for i in range(1, len(graph)):
-        matrix.append(list(map(int, graph[i][1:])))
+        matrix.append(list(map(int, graph[i][1:-1])))
     return matrix
 
 def vertexes(graph):
@@ -22,9 +22,10 @@ def vertexes(graph):
     for el in string:
         for le in el:
             v += [le]
+    v += ['H']
     return v
 
-def inverse_determinant(start, end):
+def qwe_qwe(start, end):
     global gra
     a = []
     b = []
@@ -35,12 +36,14 @@ def inverse_determinant(start, end):
             b = gra[i]
     return a, b
 
-def determinant():
+def qwe():
     global graph, gra
     a, b = list(input('Ведите вершины начала и конца маршрута ').split())
     end = -1
     start = -1
-    for i in range(len(gra)):
+    n = len(gra)
+    # print(n)
+    for i in range(n):
         if gra[i] == a:
             start = i
         if gra[i] == b:
@@ -79,13 +82,9 @@ def search():
 graph1 = read('abc.txt')
 graph = adjacency_matrix(graph1)
 gra = vertexes(graph1)
-start, end = determinant()
-a, b = inverse_determinant(start, end)
-#print("graph1", "\n", graph1, "\n")
-#print("graph", "\n", graph, "\n")
-#print("gra", "\n", gra, "\n")
-#print ("start, end", "\n", start, end, "\n")
-#print("a, b", "\n", a, b, "\n")
+start, end = qwe()
+a, b = qwe_qwe(start, end)
+
 
 N = len(graph)
 starts = start
