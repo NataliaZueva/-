@@ -4,11 +4,12 @@ def file_read(title):
     for line in b:
         a.append([int(x) for x in line.split()])
     return a
+
 def fas(w, v):
     i1=len(v)  #строки
     j1=len(v[1])  #cтолбцы
     for i in range(len(v)):
-      for j in range(j1):
+      for j in range(len(v[1])):
           if v[i][j] != w:
               v[i][j]=0
     for i in v:
@@ -16,11 +17,13 @@ def fas(w, v):
             print(i2, end=' ')
         print()
     return v
+
 def counter(i,j,i1,j1):
     global v
     save = v[i][j]
     v[i][j]=0
     v1=set()
+    print(v1)
     if save == 0:
         return v1
     elif save !=0:  
@@ -57,8 +60,10 @@ j1=len(v[1])  #cтолбцы
 for i in range(i1):
   for j in range(j1):
       counters = counter (i,j,i1,j1)
-      if counter != set():
-          k+=1
+      if counter != set() :
+          k+=+1
+
+
       
 print("Всего острoвков", k)
    
