@@ -8,11 +8,12 @@ import pygame as pg
 class Planet:
     a = b = 500
     i = 0
-    r: any
-    V: any
-    speed: any
-    color: any
+    __r: any
+    __V: any
+    __speed: any
+    __color: any
 
+    """Формула для """
     def draw(self):
         angle = self.i * pi / self.speed
         l = 0.73 - m.acos((self.a - 700) / m.sqrt(500 ** 2 - 400 ** 2))
