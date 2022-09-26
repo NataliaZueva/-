@@ -41,7 +41,7 @@ class Vector:
         return (num) ** (0.5)
 
     def helps(self):
-        eps = input("С какой точностью вы хотите узнать равенство векторов? ")
+        eps = int(input("С какой точностью вы хотите узнать равенство векторов? "))
         return eps
 
     def func1(self):
