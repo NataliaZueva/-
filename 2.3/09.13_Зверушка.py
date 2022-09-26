@@ -31,7 +31,6 @@ class LittleAnimal:
     def __str__(self):
         return str(f"Name: {self.__name}, Status:  {self.__state} (0 to 6), Behaviour:  {self.__Behaviour} (0 to 3)")
 
-
     def eat(self, amount=0):
         """Покормить"""
         if amount == 0:
@@ -48,7 +47,6 @@ class LittleAnimal:
             else:
                 self.__state = State.Normal
                 st = dt.now()
-
             return
 
         if amount == 1:

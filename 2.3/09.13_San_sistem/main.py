@@ -8,36 +8,34 @@ import pygame as pg
 class Planet:
     a = b = 500
     i = 0
-    __r: any
-    __V: any
-    __speed: any
-    __color: any
+    r: any
+    V: any
+    speed: any
+    color: any
 
-    """Формула для """
-    def draw(self):
-        angle = self.i * pi / self.speed
+    def draw(self, aа):
+        angle = self.i * 3.14 / self.speed
         l = 0.73 - m.acos((self.a - 700) / m.sqrt(500 ** 2 - 400 ** 2))
         int(l)
         a = (self.r * 60 * m.cos(angle + l)) + sun_1
         b = (self.r * 60 * m.sin(angle + l)) + sun_2
         self.i += 3
         pg.draw.circle(screen, self.color, (int(a), int(b)), self.V * 10)
-        # for event in pg.event.get():
-        #     if event.type == pg.MOUSEBUTTONDOWN:
-        #         if event.button == 1:
-        #             print(11)
 
 
 class Color():
+    WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     RED = (255, 0, 0)
     GREEN = (0, 255, 0)
+    BLUE = (66, 170, 255)
     GRAY = (125, 125, 125)
     LIGHT_BLUE = (100, 149, 237)
     SUN = (225, 225, 0)
     YELLOW = (255, 207, 72)
     LIGHT_YELLOW = (255, 207, 244)
     PALE_ORANGE = (46, 57, 99)
+    PINK = (230, 50, 230)
     TWEETER = (31, 174, 233)
 
 
@@ -57,7 +55,6 @@ HEIGHT = 768
 FPS = 30
 sun_1 = WIDTH / 2
 sun_2 = HEIGHT / 2
-pi = m.pi
 
 pg.init()
 pg.mixer.init()
@@ -65,7 +62,8 @@ screen = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption("San sistem")
 clock = pg.time.Clock()
 
-# Цикл игры
+pi = m.pi
+
 running = True
 while running:
     clock.tick(FPS)
@@ -74,21 +72,17 @@ while running:
             running = False
 
     screen.fill(Color.BLACK)
-    pg.draw.circle(screen, Color.SUN, (sun_1, sun_2), 10)
-    Planes.Mercury.draw()
-    Planes.Venus.draw()
-    Planes.Earth.draw()
-    Planes.Mars.draw()
-    Planes.Jupiter.draw()
-    Planes.Saturn.draw()
-    Planes.Uranus.draw()
-    Planes.Neptune.draw()
-    pg.display.update()
 
-    pressed = pg.mouse.get_pressed()
-    pos = pg.mouse.get_pos()
-    if pressed[0]:
-        pg.draw.circle(screen, Color.RED, pos, 5)
+    for a in range(0, 1):
+        pg.draw.circle(screen, Color.SUN, (sun_1, sun_2), 10)
+        Planes.Mercury.draw(a)
+        Planes.Venus.draw(a)
+        Planes.Earth.draw(a)
+        Planes.Mars.draw(a)
+        Planes.Jupiter.draw(a)
+        Planes.Saturn.draw(a)
+        Planes.Uranus.draw(a)
+        Planes.Neptune.draw(a)
         pg.display.update()
 
 pg.quit()
