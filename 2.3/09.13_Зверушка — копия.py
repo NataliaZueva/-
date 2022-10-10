@@ -19,7 +19,6 @@ class Behaviour:
 
 
 class LittleAnimal:
-
     def __init__(self, name="Anon", eat_timeout=10):
         self.__flag = True
         self.__name = name
@@ -29,7 +28,7 @@ class LittleAnimal:
         self.__behaviour = Behaviour.Calmness
 
     def __str__(self):
-        return str(f"Name: {self.__name}, Status:  {self.__state} (0 to 6), Behaviour:  {self.__Behaviour} (0 to 3)")
+        print(str(f"Name: {self.__name}, Status:  {self.__state} (0 to 6), Behaviour:  {self.__behaviour} (0 to 3)"))
 
     def eat(self, amount=0):
         """Покормить"""
@@ -39,6 +38,13 @@ class LittleAnimal:
             self.__flag = False
             print("Dead")
 
+    @property
+    def state(self):
+        return self.__state
+
+    @state.setter
+    def state(self):
+        self.__state = state
 
     # def eat(self, amount=0):
     #     """Покормить"""
@@ -88,4 +94,10 @@ class LittleAnimal:
     #     self.__state = state
 
 
-a = Xrxr()
+a = LittleAnimal()
+# if (v := int(input("Если хотите узнать о животном 1, покормить 2\n   "))) == 1:
+#     a.__str__()
+# else:
+#     a.eat()
+
+print( (dt.now() - 1).seconds())

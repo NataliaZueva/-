@@ -1,11 +1,12 @@
 nomer = 0
-d = { }
+d = {}
 replici = []
 roles = []
 
+
 def read():
     global nomer, d, replici, roles
-    with open("roles.txt", "r",encoding='utf-8') as file:
+    with open("roles.txt", "r", encoding='utf-8') as file:
         for line in file:
             line = line.rstrip()
             if line != "roles:":
@@ -14,11 +15,8 @@ def read():
                 else:
                     break
 
-
-
         roles.append("Слова автора")
         roles.sort()
-
 
         for i in range(len(roles)):
             replici.append([])
@@ -32,8 +30,6 @@ def read():
                         if "Слова автора" == roles[i]:
                             replici[i].append(value.replace(')', ''))
                     line = line.partition("(")[0]
-
-
 
                 if line.partition(":")[0] in roles:
                     key = line.partition(":")[0]
@@ -62,6 +58,7 @@ def read():
                     for i in range(len(roles)):
                         if last_key == roles[i]:
                             replici[i].append(d[last_key])
+
 
 read()
 for i in range(len(roles)):

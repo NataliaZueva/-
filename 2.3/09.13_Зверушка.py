@@ -59,13 +59,13 @@ class LittleAnimal:
             self.__state = Xrxr.states["Dead"]
         return self.__state
 
-    # @property
-    # def state(self):
-    #     return self.__state
-    #
-    # @state.setter
-    # def state(self):
-    #     self.__state = state
+    @property
+    def state(self):
+        return self.__state
+
+    @state.setter
+    def state(self):
+        self.__state = state
 
 
 a = Xrxr()
