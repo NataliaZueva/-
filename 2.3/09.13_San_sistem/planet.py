@@ -8,7 +8,6 @@ import pygame as pg
 class Planet:
     x = y = 500
     i = 0
-    __ang_ret: any
     __n: any
     __r: any
     __V: any
@@ -25,35 +24,13 @@ class Planet:
         image = pg.transform.scale(image, size)
         screen.blit(image, (x, y))
 
-        def angle_return(self):
-            return round((self.i * 3.14 / self.__speed / 3.14 * 180) % 360, 3)
-
-        # self.__ang_ret = round((self.i * 3.14 / self.__speed / 3.14 * 180) % 360, 3)
-        #
-        # @property
-        # def angle_return(self):
-        #     return self.__ang_ret
-        #
-        # @angle_return.setter
-        # def angle_return(self):
-        #     self.__ang_ret = angle_return()
-        #
+    def angle_return(self):
+        return round((self.i * 3.14 / self.__speed / 3.14 * 180) % 360, 6)
 
 
 class Color:
     WHITE = (255, 255, 255)
-    BLACK = (0, 0, 0)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 0)
-    BLUE = (66, 170, 255)
-    GRAY = (125, 125, 125)
-    LIGHT_BLUE = (100, 149, 237)
     SUN = (225, 225, 0)
-    YELLOW = (255, 207, 72)
-    LIGHT_YELLOW = (255, 207, 244)
-    PALE_ORANGE = (46, 57, 99)
-    PINK = (230, 50, 230)
-    TWEETER = (31, 174, 233)
 
 
 class Planes:
@@ -67,8 +44,21 @@ class Planes:
     Neptune = Planet(8, 6, 1.3, 1000)
 
 
-# WIDTH = 1024
-# HEIGHT = 768
+def file_read(title):
+    a = []
+    b = open(title, 'r').readlines()
+    for line in b:
+        a.append([x for x in line.split()])
+    return a
+
+
+pla = file_read('Planes.txt')
+print(pla)
+i = 0
+while i <= 7:
+    exec("x{}".format(i)
+    i += 1
+
 WIDTH = 1500
 HEIGHT = 810
 FPS = 30
@@ -78,11 +68,8 @@ sun_2 = HEIGHT / 2
 pg.init()
 pg.mixer.init()
 screen = pg.display.set_mode((WIDTH, HEIGHT))
-# screen = pg.display.set_mode((10, 10), pg.FULLSCREEN)
 pg.display.set_caption("San sistem")
 clock = pg.time.Clock()
-
-touchRect = pg.Rect(450, 450, 100, 100)
 
 touchRect1 = pg.Rect(50, 50, 100, 100)
 touchRect2 = pg.Rect(50, 250, 100, 100)
@@ -105,13 +92,13 @@ text7 = f1.render('Uranus', True, Color.WHITE)
 text8 = f1.render('Neptune', True, Color.WHITE)
 text22 = f1.render("Нажмите на любую планету", True, Color.WHITE)
 
+
 bg = pg.image.load('fon.png').convert()
 
 
 class Printed:
     def __init__(self):
         self.d = Planes.Mercury.angle_return()
-        # self.d = 123
 
     def qwe(self, a):
         b = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
@@ -124,6 +111,8 @@ ball = pg.sprite.Group()
 global PLAN
 PLAN = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png']
 
+
+aaa = Planet(x1)
 running = True
 while running:
     clock.tick(FPS)
@@ -160,12 +149,17 @@ while running:
                 te = Printed()
                 text22 = te.qwe(8)
 
-    # screen.fill(Color.BLACK)
     screen.blit(bg, (0, 0))
 
     for a in range(0, 1):
         pg.draw.circle(screen, Color.SUN, (sun_1, sun_2), 10)
-        Planes.Mercury.draw()
+
+        Mercury = Planet(1, 0.5, 0.4, 120)
+        # for i in range(2):
+
+        # print(a)
+        aaa.draw()
+        # Planes.Mercury.draw()
         Planes.Venus.draw()
         Planes.Earth.draw()
         Planes.Mars.draw()
@@ -174,6 +168,7 @@ while running:
         Planes.Saturn.draw()
         Planes.Uranus.draw()
         Planes.Neptune.draw()
+
 
         screen.blit(text1, (40, 150))
         screen.blit(text2, (50, 350))
