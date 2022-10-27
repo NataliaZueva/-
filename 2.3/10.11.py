@@ -3,16 +3,13 @@ class MyList(list):
         list.__init__(*args, **kwargs)
 
     def __sub__(self, l):
-        if len(self) <= len(l):
-            f = list(l)
-            f = [-i for i in f]
-        else:
-            f = list(self)
-        c = min(len(self), len(l))
-        for i in range(c):
-            f[i] = self[i] - l[i]
+        f = list(self)
+        for i in range(len(list(l))):
+            while l[i] in f:
+                f.remove(l[i])
         print(f"First list {self}, second list {l}. Subtraction on result: {f}")
 
 
-a = MyList([1, 2, 3, 5])
-a - [10, 3, 4, 5]
+l = MyList([1, 1, 2, 4, 5, 5, 7])
+l2 = [1, 2]
+l - l2
