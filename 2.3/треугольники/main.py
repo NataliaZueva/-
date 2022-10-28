@@ -1,32 +1,45 @@
-import os
 from math import *
 
 
-def file_read(title):
-    a = []
-    b = open(title, 'r')
-    b.read(4)
-    for line in b:
-        a.append(line)
-    return a
+class Points:
+    def __init__(self, title):
+        self.title = title
+        self.file_read()
+        self.creating_array()
 
+    def file_read(self):
+        self.a = []
+        b = open(self.title, 'r')
+        b.read(4)
+        for line in b:
+            self.a.append(line)
+        self.a = self.a[0]
 
-a = file_read('text.txt')
-a = a[0]
-i = 0
-lst = []
-while i < len(a):
-    if a[i] == "[":
-        i += 1
-        start = i
-        while a[i] != "]":
+    def creating_array(self):
+        i = 0
+        self.__lst = []
+        while i < len(self.a):
+            if self.a[i] == "[":
+                i += 1
+                start = i
+                while self.a[i] != "]":
+                    i += 1
+                end = i
+                self.__lst.append(self.a[start:end].split(","))
             i += 1
-        end = i
-        lst.append(a[start:end].split(","))
+        for i in range(len(self.__lst)):
+            self.__lst[i] = list(map(int, self.__lst[i]))
 
-    i += 1
-for i in range(len(lst)):
-    lst[i] = list(map(int, lst[i]))
+    @property
+    def array(self):
+        return self.__lst
+
+    def __len__(self):
+        return len(self.__lst)
+
+    def __getitem__(self, key):
+        return self.__lst[key]
+
 
 
 class Triangle:
@@ -53,17 +66,27 @@ class Triangle:
     def get_square(self):
         return self.__square
 
+    def __ne__(self, other):
+        return self.__square != other
 
-mas = []
-for i in range(1, len(lst) - 1):
-    a = Triangle(lst[i - 1], lst[i], lst[i + 1])
-    mas.append(a.get_square)
+    def __lt__(self, other):
+        return self.__square < other
 
-print(f"max = {max(mas)}")
+    def __gt__(self, other):
+        return self.__square > other
 
-minn = max(mas) + 1
-for i in mas:
-    if i != -1:
-        minn = min(i, minn)
 
-print(f"min = {minn}")
+set_points = Points('text.txt')
+
+maximum, minimum = 0, 0
+for i in range(1, set_points.__len__() - 1):
+    a = Triangle(set_points[i - 1], set_points[i], set_points[i + 1])
+    if a != -1 and maximum == 0 and minimum == 0:
+        maximum, minimum = a.get_square, a.get_square
+    if a != -1:
+        if a.get_square > maximum:
+            maximum = a.get_square
+        if a.get_square < minimum:
+            minimum = a.get_square
+
+print(f"max = {maximum}, min = {minimum}")
