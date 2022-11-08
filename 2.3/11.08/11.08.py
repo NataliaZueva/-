@@ -63,7 +63,20 @@ def task4():
 # задача 5
 # mydict = {"Зима": {1, 2, 12}, "Весна": {3, 4, 5}, "Лето": {6, 7, 8}, "Осень": {9, 10, 11},}
 # # a = input("Введите номер месяца: ")
-# print(list(mydict.keys())[list(mydict.values()).index(19)])
+# print(list(mydict.keys())[list(mydict.values()).index()
+
+def task5():
+    num = int(input("Введите номер месяца: "))
+    if num <= 2 or num == 12:
+        print("Зима")
+    if (num >= 3) or (num <= 5):
+        print("Весна")
+    if (num >= 6) or (num <= 8):
+        print("Лето")
+    if (num >= 9) or (num <= 11):
+        print("Осень")
+
+task5()
 
 def task6():
     N = int(input("Введите N: "))
@@ -165,8 +178,14 @@ def task13():
     mac = [1, 2, 3, 4, 5]
     res = sum_mac(mac, len(mac))
     print(res)
+
+
 #
 #
 # a = input("Номер задачи: ")
-# list = [task1, task2_1, task3_1, task3_2, task4, task6, task7, task8, task9, task10]
+# list = [task1, task2_1, task3_1, task3_2, task4, task6, task7, task8, task9, task10,  task12,  task13]
 # list[a - 1]()
+
+# n, m = map(int, input("Введите n и m: ").split())
+# for i in range(n, m):
+#     print(' '.join(str(i * v) for v in range(n, m)))
