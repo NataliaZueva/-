@@ -41,9 +41,10 @@ class Points:
         return self.__lst[key]
 
 
-
 class Triangle:
     def __init__(self, a1, a2, a3):
+        self.a, self.b, self.c, self.p = None, None, None, None
+        self.__square = -1
         self.__a1 = a1
         self.__a2 = a2
         self.__a3 = a3
@@ -59,8 +60,13 @@ class Triangle:
         self.calculations()
         if (self.a < (self.b + self.c)) and (self.b < (self.a + self.c)) and (self.c < (self.b + self.a)):
             self.__square = sqrt(self.p * (self.p - self.a) * (self.p - self.b) * (self.p - self.c))
+            # self.__square = 0.5 * (self.__a1[0] * (self.__a2[1] - self.__a3[1]) +
+            #                        self.__a2[0] * (self.__a3[1] - self.__a1[1]) +
+            #                        self.__a3[0] * (self.__a1[1] - self.__a2[1]))
+            # self.__square = 0.5 * ((self.__a1[0] - self.__a3[0]) * (self.__a2[1] - self.__a3[1]) -
+            #                        (self.__a2[0] - self.__a3[0]) * (self.__a1[1] - self.__a3[1]))
         else:
-            self.__square = -1
+            pass
 
     @property
     def get_square(self):
@@ -74,6 +80,33 @@ class Triangle:
 
     def __gt__(self, other):
         return self.__square > other
+
+
+class Fourangle:
+    def __init__(self, a1, a2, a3, a4):
+        self.a, self.b, self.c, self.p = None, None, None, None
+        self.__square = -1
+        self.__a1 = a1
+        self.__a2 = a2
+        self.__a3 = a3
+        self.__a4 = a4
+        self.square()
+
+    def calculations(self):
+        self.a = sqrt((self.__a1[1] - self.__a1[0]) ** 2)
+        self.b = sqrt((self.__a2[1] - self.__a2[0]) ** 2)
+        self.c = sqrt((self.__a3[1] - self.__a3[0]) ** 2)
+        self.d = sqrt((self.__a4[1] - self.__a4[0]) ** 2)
+        self.p = (self.a + self.b + self.c) / 2
+
+    def square(self):
+        self.calculations()
+        if (self.a < (self.b + self.c)) and (self.b < (self.a + self.c)) and (self.c < (self.b + self.a)):
+            self.__square = sqrt(self.p * (self.p - self.a) * (self.p - self.b) * (self.p - self.c))
+        else:
+            pass
+
+
 
 
 set_points = Points('text.txt')
