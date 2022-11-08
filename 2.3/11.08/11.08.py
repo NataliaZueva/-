@@ -178,12 +178,17 @@ def task13():
     res = sum_mac(mac, len(mac))
     print(res)
 
-#
-#
 
+print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
 a = int(input("Номер задачи: "))
-list = [task1, task2_1, task3_1, task3_2, task4, task5, task6, task7, task8, task9, task10,  task12,  task13]
-list[a - 1]()
+if a == 3:
+    print("Доступные подномера задачи: 1, 2")
+    a = int(input("Выберете подномер: "))
+    list = [task3_1, task3_2]
+    list[a - 1]()
+else:
+    list = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10,  task12,  task13]
+    list[a - 1]()
 
 # n, m = map(int, input("Введите n и m: ").split())
 # for i in range(n, m):
