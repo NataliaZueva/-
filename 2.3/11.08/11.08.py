@@ -1,6 +1,7 @@
 import time
 from random import randint
 
+
 # # задача 1
 # a, b, c = input().split()
 # startTime = time.time()
@@ -60,13 +61,28 @@ from random import randint
 
 # задача 5
 
-# задача 6
-N = int(input("Введите N: "))
-sum_num, k1, k2 = 0, 0, 0
-for i in range(1, N+1):
-    sum_num += i
-    if i % 2 != 0:
-        k1 += 1
-    else:
-        k2 += 1
-print(sum_num, k1, k2)
+# # задача 6
+# N = int(input("Введите N: "))
+# sum_num, k1, k2 = 0, 0, 0
+# for i in range(1, N+1):
+#     sum_num += i
+#     if i % 2 != 0:
+#         k1 += 1
+#     else:
+#         k2 += 1
+# print(sum_num, k1, k2)
+
+# задача 7
+def divider(a):
+    if a == 1:
+        return 1
+    sum_num = 2
+    for i in range(2, a // 2 + 1):
+        if a % i == 0:
+            sum_num += 1
+    return sum_num
+
+
+n = int(input("Введите n: "))
+for i in range(1, n+1):
+    print(i, divider(i))
