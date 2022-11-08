@@ -72,17 +72,65 @@ from random import randint
 #         k2 += 1
 # print(sum_num, k1, k2)
 
-# задача 7
+# # задача 7
+# def divider(a):
+#     if a == 1:
+#         return 1
+#     sum_num = 2
+#     for i in range(2, a // 2 + 1):
+#         if a % i == 0:
+#             sum_num += 1
+#     return sum_num
+#
+#
+# n = int(input("Введите n: "))
+# for i in range(1, n+1):
+#     print(i, divider(i))
+
+# # задача 9
+# def refund(a):
+#     flag = -1
+#     c = a
+#     while c != 0:
+#         d = c % 10
+#         if d != 0:
+#             if a % d == 0:
+#                 flag = 1
+#             elif a % d != 0:
+#                 flag = 0
+#                 break
+#         else:
+#             flag = 0
+#             break
+#         c = c // 10
+#     if flag:
+#         return a
+#
+#
+# N, M = map(int, input("Введите N и M ").split())
+# roster = []
+# for i in range(N, M + 1):
+#     a = refund(i)
+#     if a is not None:
+#         roster.append(i)
+# print(roster)
+
+
+# задача 10
 def divider(a):
     if a == 1:
         return 1
-    sum_num = 2
-    for i in range(2, a // 2 + 1):
+    sum_num = 0
+    for i in range(1, a // 2 + 1):
         if a % i == 0:
-            sum_num += 1
+            # print('i = ', i)
+            sum_num += i
     return sum_num
 
 
-n = int(input("Введите n: "))
-for i in range(1, n+1):
-    print(i, divider(i))
+N, i = 1, 1
+while N < 5:
+    i += 1
+    if i == divider(i):
+        print(i)
+        N += 1
