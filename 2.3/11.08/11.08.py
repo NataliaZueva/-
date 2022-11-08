@@ -224,11 +224,11 @@ print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1
 num = int(input("Номер задачи: "))
 if num == 3 or num == 2:
     print("Доступные подномера задачи: 1, 2")
-    num = int(input("Выберете подномер: "))
     if num == 2:
         lst = [task2_1, task2_2]
     else:
         lst = [task3_1, task3_2]
+    num = int(input("Выберете подномер: "))
     print(lst[num - 1]())
 else:
     lst = [task1, None, None, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13]
