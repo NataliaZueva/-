@@ -38,24 +38,35 @@ from random import randint
 #     x2 = x * x2
 # print(x2)
 
-# задача 4
-i = 0
-a = 1
-f = []
-while i <= 250:
-    i += a
-    a = i - a
-    f.append(i)
-flag = True
-while flag:
-    c = int(input("Введите число от 0 до 250: "))
-    if (c >= 0) and (c <= 250):
-        flag = False
+# # задача 4
+# i = 0
+# a = 1
+# f = []
+# while i <= 250:
+#     i += a
+#     a = i - a
+#     f.append(i)
+# flag = True
+# while flag:
+#     c = int(input("Введите число от 0 до 250: "))
+#     if (c >= 0) and (c <= 250):
+#         flag = False
+#     else:
+#         print("Кажется вы не попали в промежуток чисел...")
+# if c in f:
+#     print("Это число входит в список фибоначи")
+# else:
+#     print("Это число не входит в список фибоначи")
+
+# задача 5
+
+# задача 6
+N = int(input("Введите N: "))
+sum_num, k1, k2 = 0, 0, 0
+for i in range(1, N+1):
+    sum_num += i
+    if i % 2 != 0:
+        k1 += 1
     else:
-        print("Кажется вы не попали в промежуток чисел...")
-if c in f:
-    print("Это число входит в список фибоначи")
-else:
-    print("Это число не входит в список фибоначи")
-
-
+        k2 += 1
+print(sum_num, k1, k2)
