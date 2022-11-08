@@ -1,8 +1,10 @@
 import math
 import time
 from random import randint
+from memory_profiler import profile
 
 
+@profile
 def task1():
     a, b, c = input("Введите 3 переменных: ").split()
     a, b, c = b, c, a
@@ -39,7 +41,6 @@ def task3_2():
 
 
 def task4():
-    global c
     i = 0
     a = 1
     f = []
@@ -59,11 +60,6 @@ def task4():
     else:
         return "Это число не входит в список фибоначи"
 
-
-# задача 5
-# mydict = {"Зима": {1, 2, 12}, "Весна": {3, 4, 5}, "Лето": {6, 7, 8}, "Осень": {9, 10, 11},}
-# # a = input("Введите номер месяца: ")
-# print(list(mydict.keys())[list(mydict.values()).index()
 
 def task5():
     num = int(input("Введите номер месяца: "))
@@ -165,8 +161,7 @@ def task10():
 
 def task12():
     mac = [1, 2, 3, 4, 5]
-    my_mac = list(range(len(mac), -1, -1))
-    print(my_mac)
+    return list(range(len(mac), -1, -1))
 
 
 def task13():
@@ -181,21 +176,17 @@ def task13():
     return res
 
 
-# print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
-# a = int(input("Номер задачи: "))
-# if a == 3:
-#     print("Доступные подномера задачи: 1, 2")
-#     a = int(input("Выберете подномер: "))
-#     list = [task3_1, task3_2]
-#     print(list[a - 1]())
-# else:
-#     list = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10, task12, task13]
-#     print(list[a - 1]())
+print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
+a = int(input("Номер задачи: "))
+if a == 3:
+    print("Доступные подномера задачи: 1, 2")
+    a = int(input("Выберете подномер: "))
+    lst = [task3_1, task3_2]
+    print(lst[a - 1]())
+else:
+    lst = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10, None, task12, task13]
+    print(lst[a - 1]())
 
 # n, m = map(int, input("Введите n и m: ").split())
 # for i in range(n, m):
 #     print(' '.join(str(i * v) for v in range(n, m)))
-
-mac = [1, 2, 3, 4, 5]
-my_mac = list(range(len(mac), -1, -1))
-print(my_mac)
