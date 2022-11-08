@@ -12,7 +12,7 @@ def task1():
     print("Время, затраченное на выполнение = ", totalTime)
 
 
-def task2():
+def task2_1():
     flag = True
     while flag:
         a, b = input("Введите 2 числа: ").split()
@@ -149,10 +149,24 @@ def task10():
             N += 1
 
 
-# # задача 12
-# mac = [1, 2, 3, 4, 5, 6, 7]
+def task12():
+    mac = [1, 2, 3, 4, 5]
+    my_mac = list(range(len(mac), -1, -1))
+    print(my_mac)
 
 
-a = input("Номер задачи: ")
-list = [task1, task2, task3_1, task3_2, task4, task6, task7, task8, task9, task10]
-list[a - 1]()
+def task13():
+    def sum_mac(m, l_m):
+        if l_m != 0:
+            return sum_mac(m, l_m - 1) + m[l_m - 1]
+        else:
+            return 0
+
+    mac = [1, 2, 3, 4, 5]
+    res = sum_mac(mac, len(mac))
+    print(res)
+#
+#
+# a = input("Номер задачи: ")
+# list = [task1, task2_1, task3_1, task3_2, task4, task6, task7, task8, task9, task10]
+# list[a - 1]()
