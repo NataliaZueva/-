@@ -1,16 +1,18 @@
+import datetime
 import math
 import time
 from random import randint
+
 from memory_profiler import profile
 
 
 @profile
 def task1():
+    start = datetime.datetime.now()
     a, b, c = input("Введите 3 переменных: ").split()
     a, b, c = b, c, a
-    endTime = time.time()
-    totalTime = endTime
-    return f"{a} {b} {c} \nВремя, затраченное на выполнение =  {totalTime}"
+    end = datetime.datetime.now()
+    return f"{a} {b} {c} \nВремя, затраченное на выполнение =  {end - start}"
 
 
 def task2_1():
@@ -18,12 +20,25 @@ def task2_1():
     while flag:
         a, b = input("Введите 2 числа: ").split()
         try:
-            a = int(a)
-            b = int(b)
+            a = float(a)
+            b = float(b)
         except ValueError:
             print('Введено не число')
         else:
             return a + b
+
+
+def task2_2():
+    sum1 = 0
+    n = int(input("Введите N - количество чисел: "))
+    k = list(map(float, input(f"Введите {n} чисел: ").split()))
+    if n == len(k):
+        for i in k:
+            sum1 += i
+    else:
+        print("Количество введенных не соответствыет числу N")
+        return task2_2()
+    return sum1
 
 
 def task3_1():
@@ -32,12 +47,15 @@ def task3_1():
     return x1
 
 
+@profile
 def task3_2():
-    task3_1()
+    start = datetime.datetime.now()
+    x = task3_1()
     x2 = 1
     for i in range(5):
         x2 = x * x2
-    return x2
+    end = datetime.datetime.now()
+    return f"{x2} \nВремя, затраченное на выполнение =  {end - start}"
 
 
 def task4():
@@ -62,6 +80,13 @@ def task4():
 
 
 def task5():
+    res = {'Зима': (1, 2, 12),
+           'Весна': (3, 4, 5),
+           'Лето': (6, 7, 8),
+           'Осень': (9, 10, 11)}
+    num = int(input("Введите номер месяца: "))
+    print([key for key in res.keys() if num in res[key]])
+
     num = int(input("Введите номер месяца: "))
     if (num <= 2) or (num == 12):
         return "Зима"
@@ -95,10 +120,14 @@ def divider(a):
     return sum_num
 
 
+@profile
 def task7():
-    n = int(input("Введите n: "))
-    for i in range(1, n + 1):
-        return i, divider(i)
+    start = datetime.datetime.now()
+    N = int(input("Введите N: "))
+    for i in range(1, N + 1):
+        print(i, divider(i))
+    end = datetime.datetime.now()
+    return f"Время, затраченное на выполнение =  {end - start}"
 
 
 def task8():
@@ -159,6 +188,21 @@ def task10():
     return f
 
 
+def task11():
+    mac = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    start1 = time.time()
+    res = mac[-1]
+    print(res)
+    end1 = time.time()
+    start2 = time.time()
+    print(next(reversed(mac)))
+    end2 = time.time()
+    start3 = time.time()
+    print(mac.pop())
+    end3 = time.time()
+    print(f"1: {start1 - end3}, 2: {start2 - end2}, 3: {start3 - end3}")
+
+
 def task12():
     mac = [1, 2, 3, 4, 5]
     return list(range(len(mac), -1, -1))
@@ -176,17 +220,16 @@ def task13():
     return res
 
 
-print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
-a = int(input("Номер задачи: "))
-if a == 3:
+print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13")
+num = int(input("Номер задачи: "))
+if num == 3 or num == 2:
     print("Доступные подномера задачи: 1, 2")
-    a = int(input("Выберете подномер: "))
-    lst = [task3_1, task3_2]
-    print(lst[a - 1]())
+    num = int(input("Выберете подномер: "))
+    if num == 2:
+        lst = [task2_1, task2_2]
+    else:
+        lst = [task3_1, task3_2]
+    print(lst[num - 1]())
 else:
-    lst = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10, None, task12, task13]
-    print(lst[a - 1]())
-
-# n, m = map(int, input("Введите n и m: ").split())
-# for i in range(n, m):
-#     print(' '.join(str(i * v) for v in range(n, m)))
+    lst = [task1, None, None, task4, task5, task6, task7, task8, task9, task10, task11, task12, task13]
+    print(lst[num - 1]())
