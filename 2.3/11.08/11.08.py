@@ -26,7 +26,14 @@ from random import randint
 
 # задача 2.2
 
-# задача 3.1
+# # задача 3.1
 x = randint(0, 100)
-x = x ** 5
-print(x)
+# x1 = x ** 5
+# print(x1)
+
+
+# задача 3.2
+x2 = 1
+for i in range(5):
+    x2 = x * x2
+print(x2)
