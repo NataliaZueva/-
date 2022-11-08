@@ -67,16 +67,18 @@ def task4():
 
 def task5():
     num = int(input("Введите номер месяца: "))
-    if num <= 2 or num == 12:
+    if (num <= 2) or (num == 12):
         print("Зима")
-    if (num >= 3) or (num <= 5):
+    if (num >= 3) and (num <= 5):
         print("Весна")
-    if (num >= 6) or (num <= 8):
+    if (num >= 6) and (num <= 8):
         print("Лето")
-    if (num >= 9) or (num <= 11):
+    if (num >= 9) and (num <= 11):
         print("Осень")
 
+
 task5()
+
 
 def task6():
     N = int(input("Введите N: "))
@@ -178,7 +180,6 @@ def task13():
     mac = [1, 2, 3, 4, 5]
     res = sum_mac(mac, len(mac))
     print(res)
-
 
 #
 #
