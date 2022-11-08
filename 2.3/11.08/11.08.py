@@ -7,9 +7,8 @@ def task1():
     a, b, c = input("Введите 3 переменных: ").split()
     a, b, c = b, c, a
     endTime = time.time()
-    print(a, b, c)
     totalTime = endTime
-    print("Время, затраченное на выполнение = ", totalTime)
+    return f"{a} {b} {c} \nВремя, затраченное на выполнение =  {totalTime}"
 
 
 def task2_1():
@@ -40,6 +39,7 @@ def task3_2():
 
 
 def task4():
+    global c
     i = 0
     a = 1
     f = []
@@ -55,9 +55,9 @@ def task4():
         else:
             print("Кажется вы не попали в промежуток чисел...")
     if c in f:
-        print("Это число входит в список фибоначи")
+        return "Это число входит в список фибоначи"
     else:
-        print("Это число не входит в список фибоначи")
+        return "Это число не входит в список фибоначи"
 
 
 # задача 5
@@ -68,13 +68,13 @@ def task4():
 def task5():
     num = int(input("Введите номер месяца: "))
     if (num <= 2) or (num == 12):
-        print("Зима")
+        return "Зима"
     if (num >= 3) and (num <= 5):
-        print("Весна")
+        return "Весна"
     if (num >= 6) and (num <= 8):
-        print("Лето")
+        return "Лето"
     if (num >= 9) and (num <= 11):
-        print("Осень")
+        return "Осень"
 
 
 def task6():
@@ -102,7 +102,7 @@ def divider(a):
 def task7():
     n = int(input("Введите n: "))
     for i in range(1, n + 1):
-        print(i, divider(i))
+        return i, divider(i)
 
 
 def task8():
@@ -111,7 +111,7 @@ def task8():
         for a in range(N, b):
             c = math.sqrt(a * a + b * b)
             if c % 1 == 0:
-                print(a, b, int(c))
+                return a, b, int(c)
 
 
 def refund(a):
@@ -140,7 +140,7 @@ def task9():
         a = refund(i)
         if a is not None:
             roster.append(i)
-    print(roster)
+    return roster
 
 
 def task10():
@@ -154,11 +154,13 @@ def task10():
         return sum_num
 
     N, i = 1, 1
+    f = []
     while N < 5:
         i += 1
         if i == divider1(i):
-            print(i)
+            f.append(i)
             N += 1
+    return f
 
 
 def task12():
@@ -176,20 +178,24 @@ def task13():
 
     mac = [1, 2, 3, 4, 5]
     res = sum_mac(mac, len(mac))
-    print(res)
+    return res
 
 
-print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
-a = int(input("Номер задачи: "))
-if a == 3:
-    print("Доступные подномера задачи: 1, 2")
-    a = int(input("Выберете подномер: "))
-    list = [task3_1, task3_2]
-    list[a - 1]()
-else:
-    list = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10,  task12,  task13]
-    list[a - 1]()
+# print("Доступные задачи: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13")
+# a = int(input("Номер задачи: "))
+# if a == 3:
+#     print("Доступные подномера задачи: 1, 2")
+#     a = int(input("Выберете подномер: "))
+#     list = [task3_1, task3_2]
+#     print(list[a - 1]())
+# else:
+#     list = [task1, task2_1, None, task4, task5, task6, task7, task8, task9, task10, task12, task13]
+#     print(list[a - 1]())
 
 # n, m = map(int, input("Введите n и m: ").split())
 # for i in range(n, m):
 #     print(' '.join(str(i * v) for v in range(n, m)))
+
+mac = [1, 2, 3, 4, 5]
+my_mac = list(range(len(mac), -1, -1))
+print(my_mac)
