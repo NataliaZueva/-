@@ -77,9 +77,6 @@ def task5():
         print("Осень")
 
 
-task5()
-
-
 def task6():
     N = int(input("Введите N: "))
     sum_num, k1, k2 = 0, 0, 0
@@ -183,9 +180,10 @@ def task13():
 
 #
 #
-# a = input("Номер задачи: ")
-# list = [task1, task2_1, task3_1, task3_2, task4, task6, task7, task8, task9, task10,  task12,  task13]
-# list[a - 1]()
+
+a = int(input("Номер задачи: "))
+list = [task1, task2_1, task3_1, task3_2, task4, task5, task6, task7, task8, task9, task10,  task12,  task13]
+list[a - 1]()
 
 # n, m = map(int, input("Введите n и m: ").split())
 # for i in range(n, m):
