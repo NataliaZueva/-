@@ -20,7 +20,7 @@ class Behaviour:
 
 class LittleAnimal:
 
-    def __init__(self, name="Anon", eat_timeout=5, play_timeout=5):
+    def __init__(self, name="Anon", eat_timeout=1, play_timeout=1):
         self.__flag = True
         self.__name = name
         self.__eat_timeout = eat_timeout
@@ -57,30 +57,33 @@ class LittleAnimal:
         """Проверка на смерть"""
         if self.__state == State.Dead:
             self.__del__()
-            return 123
+            print(self)
+            return 0
         else:
             st_now = (dt.now() - self.__st).seconds
             if st_now // self.__eat_timeout > 0:
-                print(st_now // self.__eat_timeout)
                 self.__state -= 1
                 print('Ваше состояние ухудшелость на 1 (еда)')
+                self.__str__()
             st_now_b = (dt.now() - self.__st_b).seconds
             if st_now_b // self.__play_timeout > 0:
-                print(st_now_b // self.__play_timeout)
-                self.__behaviour -= 1
+                if self.__behaviour > 0:
+                    self.__behaviour -= 1
                 print('Ваше состояние ухудшелость на 1 (игра)')
 
     def __del__(self):
         """Смерть"""
         print(f'Ваш зверек - {self.__name} умер, очень жаль...')
 
-    @property
-    def feeding(self):
-        return self.__state
 
-    @feeding.setter
-    def feeding(self, state):
-        self.__state = state
+@property
+def feeding(self):
+    return self.__state
+
+
+@feeding.setter
+def feeding(self, state):
+    self.__state = state
 
 
 def menu():
@@ -101,7 +104,7 @@ elif num == '1':
     track = '10 10'
     while running:
         animal.death_check()
-        if animal.death_check() == 123:
+        if animal.death_check() == 0:
             running = False
         if track == '0':
             print(end)
@@ -109,7 +112,7 @@ elif num == '1':
         if track == '1':
             print(animal.__str__())
         if track.split()[0] == 'eat':
-            animal.eat(int(a.split()[1]))
+            animal.eat(int(track.split()[1]))
         if track == 'play':
             animal.play()
         if running:
