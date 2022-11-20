@@ -51,6 +51,7 @@ clock = pg.time.Clock()
 bg = pg.image.load('fon.png').convert()
 
 # Планеты - размер, отдаленность.....
+global pla
 pla = file_read('Planes.txt')
 kk = []
 for i in pla:
@@ -80,6 +81,7 @@ class Printed:
 
     def qwe(self, a):
         b = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+        print(pla[a])
         text22 = f1.render(f'{b[a]}: {self.d}', True, (255, 255, 255))
         return text22
 
