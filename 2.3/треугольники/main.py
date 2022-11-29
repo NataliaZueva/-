@@ -1,125 +1,160 @@
-from math import *
-
-
-class Points:
-    def __init__(self, title):
-        self.title = title
-        self.file_read()
-        self.creating_array()
-
-    def file_read(self):
-        self.a = []
-        b = open(self.title, 'r')
-        b.read(4)
-        for line in b:
-            self.a.append(line)
-        self.a = self.a[0]
-
-    def creating_array(self):
-        i = 0
-        self.__lst = []
-        while i < len(self.a):
-            if self.a[i] == "[":
-                i += 1
-                start = i
-                while self.a[i] != "]":
-                    i += 1
-                end = i
-                self.__lst.append(self.a[start:end].split(","))
-            i += 1
-        for i in range(len(self.__lst)):
-            self.__lst[i] = list(map(int, self.__lst[i]))
+class Point:
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
 
     @property
-    def array(self):
-        return self.__lst
-
-    def __len__(self):
-        return len(self.__lst)
-
-    def __getitem__(self, key):
-        return self.__lst[key]
-
-
-class Triangle:
-    def __init__(self, a1, a2, a3):
-        self.a, self.b, self.c, self.p = None, None, None, None
-        self.__square = -1
-        self.__a1 = a1
-        self.__a2 = a2
-        self.__a3 = a3
-        self.square()
-
-    def calculations(self):
-        self.a = sqrt((self.__a1[1] - self.__a1[0]) ** 2)
-        self.b = sqrt((self.__a2[1] - self.__a2[0]) ** 2)
-        self.c = sqrt((self.__a3[1] - self.__a3[0]) ** 2)
-        self.p = (self.a + self.b + self.c) / 2
-
-    def square(self):
-        self.calculations()
-        if (self.a < (self.b + self.c)) and (self.b < (self.a + self.c)) and (self.c < (self.b + self.a)):
-            self.__square = sqrt(self.p * (self.p - self.a) * (self.p - self.b) * (self.p - self.c))
-            # self.__square = 0.5 * (self.__a1[0] * (self.__a2[1] - self.__a3[1]) +
-            #                        self.__a2[0] * (self.__a3[1] - self.__a1[1]) +
-            #                        self.__a3[0] * (self.__a1[1] - self.__a2[1]))
-            # self.__square = 0.5 * ((self.__a1[0] - self.__a3[0]) * (self.__a2[1] - self.__a3[1]) -
-            #                        (self.__a2[0] - self.__a3[0]) * (self.__a1[1] - self.__a3[1]))
-        else:
-            pass
+    def cord(self):
+        return self.__x, self.__y
 
     @property
-    def get_square(self):
-        return self.__square
+    def x(self):
+        return self.__x
 
-    def __ne__(self, other):
-        return self.__square != other
+    @property
+    def y(self):
+        return self.__y
 
-    def __lt__(self, other):
-        return self.__square < other
+    def __eq__(self, b):
+        return self.__x == b.__x and self.__y == b.__y
 
-    def __gt__(self, other):
-        return self.__square > other
+    def __ne__(self, b):
+        return self.__x != b.__x or self.__y != b.__y
 
-
-class Fourangle:
-    def __init__(self, a1, a2, a3, a4):
-        self.a, self.b, self.c, self.p = None, None, None, None
-        self.__square = -1
-        self.__a1 = a1
-        self.__a2 = a2
-        self.__a3 = a3
-        self.__a4 = a4
-        self.square()
-
-    def calculations(self):
-        self.a = sqrt((self.__a1[1] - self.__a1[0]) ** 2)
-        self.b = sqrt((self.__a2[1] - self.__a2[0]) ** 2)
-        self.c = sqrt((self.__a3[1] - self.__a3[0]) ** 2)
-        self.d = sqrt((self.__a4[1] - self.__a4[0]) ** 2)
-        self.p = (self.a + self.b + self.c) / 2
-
-    def square(self):
-        self.calculations()
-        if (self.a < (self.b + self.c)) and (self.b < (self.a + self.c)) and (self.c < (self.b + self.a)):
-            self.__square = sqrt(self.p * (self.p - self.a) * (self.p - self.b) * (self.p - self.c))
-        else:
-            pass
+    def __str__(self):
+        return f"({self.__x}; {self.__y})"
 
 
+class Figure:
+    def __init__(self, points):
+        self._points = points
+        self.__area = self._update_area()
+
+    def _update_area(self):
+        print("Figure::__update_area")
+        pass
+
+    @property
+    def get_area(self):
+        return self.__area
+
+    def __lt__(self, b):
+        return self.__area < b.__area
+
+    def __le__(self, b):
+        return self.__area <= b.__area
+
+    def __eq__(self, b):
+        return self.__area == b.__area
+
+    def __ne__(self, b):
+        return self.__area != b.__area
+
+    def __ge__(self, b):
+        return self.__area >= b.__area
+
+    def __gt__(self, b):
+        return self.__area > b.__area
 
 
-set_points = Points('text.txt')
+class Triangle(Figure):
+    def _update_area(self):
+        v1 = Point(self._points[0].x - self._points[1].x,
+                   self._points[0].y - self._points[1].y)
+        v2 = Point(self._points[2].x - self._points[1].x,
+                   self._points[2].y - self._points[1].y)
+        return vec_area(v1, v2)
 
-maximum, minimum = 0, 0
-for i in range(1, set_points.__len__() - 1):
-    a = Triangle(set_points[i - 1], set_points[i], set_points[i + 1])
-    if a != -1 and maximum == 0 and minimum == 0:
-        maximum, minimum = a.get_square, a.get_square
-    if a != -1:
-        if a.get_square > maximum:
-            maximum = a.get_square
-        if a.get_square < minimum:
-            minimum = a.get_square
+    def __str__(self):
+        return f"[{self._points[0]}; {self._points[1]}; {self._points[2]}]"
 
-print(f"max = {maximum}, min = {minimum}")
+
+class Quadrilateral(Figure):
+    def _update_area(self):
+        a = len_between_points(self._points[0], self._points[1])
+        b = len_between_points(self._points[1], self._points[2])
+        c = len_between_points(self._points[2], self._points[3])
+        d = len_between_points(self._points[3], self._points[0])
+        p = (a + b + c + d) / 2
+        return float(((p - a) * (p - b) * (p - c) * (p - d)) ** 0.5)
+
+    def __str__(self):
+        return f"[{self._points[0]}; {self._points[1]}; {self._points[2]}; {self._points[3]}]"
+
+
+def vec_area(v1, v2):
+    return abs((v1.x * v2.y) - (v2.x * v1.y)) / 2
+
+
+def len_between_points(p1, p2):
+    return ((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y)) ** 0.5
+
+
+def is_convex_quadrilateral(points):
+    t1 = ((points[3].x - points[0].x) * (points[1].y - points[0].y)
+          - (points[3].y - points[0].y) * (points[1].x - points[0].x))
+    t2 = ((points[3].x - points[1].x) * (points[2].y - points[1].y)
+          - (points[3].y - points[1].y) * (points[2].x - points[1].x))
+    t3 = ((points[3].x - points[2].x) * (points[0].y - points[2].y)
+          - (points[3].y - points[2].y) * (points[0].x - points[2].x))
+    t4 = ((points[0].x - points[2].x) * (points[1].y - points[2].y)
+          - (points[0].y - points[2].y) * (points[1].x - points[2].x))
+    return t1 * t2 * t3 * t4 > 0
+
+
+def points_open(file_name):
+    s = open(file_name, "r", encoding="utf-8").readline()
+    s = s.replace('[', '')
+    s = s.replace(',', '')
+    s = s.split(']')[:-1]
+
+    points = []
+    for i in s:
+        x, y = i.split()
+        points.append(Point(int(x), int(y)))
+
+    return points
+
+
+def find_triangles_from_points(points):
+    triangles_array = []
+    count_of_triangles = len(points)
+    for i in range(0, count_of_triangles - 2):
+        for j in range(i, count_of_triangles - 1):
+            for k in range(j, count_of_triangles):
+                triangle = Triangle((points[i], points[j], points[k]))
+                if triangle.get_area != 0.0:
+                    triangles_array.append(triangle)
+    return triangles_array
+
+
+def find_max_min_quadrilaterals(points_array):
+    quadrilaterals = [None, None]
+    max_area = 0
+    min_area = 10000000
+    count_of_points = len(points_array)
+    for i in range(0, count_of_points):
+        for j in range(0, count_of_points):
+            for k in range(0, count_of_points):
+                for h in range(0, count_of_points):
+                    points = (points_array[i], points_array[j], points_array[k], points_array[h])
+                    if is_convex_quadrilateral(points):
+                        four = Quadrilateral(points)
+                        if four.get_area != 0:
+                            if max_area < four.get_area:
+                                quadrilaterals[0] = four
+                                max_area = four.get_area
+                            if min_area > four.get_area:
+                                quadrilaterals[1] = four
+                                min_area = four.get_area
+    return quadrilaterals
+
+
+pts = points_open("plist.txt")
+
+triangles = sorted(find_triangles_from_points(pts))
+n = len(triangles)
+print(f"The smallest triangle: {triangles[0].get_area}\nThe biggest triangle: {triangles[n - 1].get_area}")
+
+f = find_max_min_quadrilaterals(pts)
+print(f"The smallest quadrilateral: {f[1].get_area}\nThe biggest quadrilateral: {f[0].get_area}")
