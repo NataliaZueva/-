@@ -7,7 +7,6 @@ import pygame as pg
 @dataclass
 class Planet:
     x = y = 500
-    boost = 200
     i = 0
     __n: any
     __r: any
@@ -15,18 +14,18 @@ class Planet:
     __speed: any
 
     def draw(self):
-        angle = self.i * pi / (self.__speed * self.boost)
-        # initial_angle = int(0.73 - acos((self.x - 700) / sqrt(500 ** 2 - 400 ** 2)))
-        self.x = int((self.__r * 100 * cos(angle)) + sun_1)
-        self.y = int((self.__r * 70 * sin(angle)) + sun_2)
+        angle = self.i * pi / self.__speed
+        initial_angle = int(0.73 - acos((self.x - 700) / sqrt(500 ** 2 - 400 ** 2)))
+        x = int((self.__r * 100 * cos(angle + initial_angle)) + sun_1)
+        y = int((self.__r * 70 * sin(angle + initial_angle)) + sun_2)
         self.i += 3
         image = pg.image.load(PLAN[self.__n - 1])
         size = (self.__V * 30, self.__V * 30)
         image = pg.transform.scale(image, size)
-        screen.blit(image, (self.x, self.y))
+        screen.blit(image, (x, y))
 
     def angle_return(self):
-        return round((self.i * 3.14 / (self.__speed * 200) / 3.14 * 180) % 360, 2)
+        return round((self.i * 3.14 / self.__speed / 3.14 * 180) % 360, 2)
 
 
 def file_read(title):
@@ -52,19 +51,19 @@ clock = pg.time.Clock()
 bg = pg.image.load('fon.png').convert()
 
 # Планеты - размер, отдаленность.....
-
+global pla
 pla = file_read('Planes.txt')
 kk = []
 for i in pla:
-    kk.append(Planet(int(i[1]), float(i[2]), float(i[3]), float(i[4])))
+    kk.append(Planet(int(i[1]), float(i[2]), float(i[3]), int(i[4])))
 
 # Отрисовка надписей
 f1 = pg.font.SysFont('serif', 36)
-tx = file_read("Planes1.txt")
+tx = file_read("name.txt")
 txt = []
 pos = []
 for i in tx:
-    txt.append(f1.render(i[0], True, (255, 255, 255)))
+    txt.append(f1.render(i[0], bool(i[1]), (int(i[2]), int(i[3]), int(i[4]))))
     pos.append((int(i[5]), int(i[6])))
 global text22
 text22 = f1.render("Нажмите на любую планету", True, (255, 255, 255))
@@ -81,7 +80,9 @@ class Printed:
         self.d = kk[2].angle_return()
 
     def qwe(self, a):
-        text22 = f1.render(f'{pla[a][0]}: {self.d}', True, (255, 255, 255))
+        b = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+        print(pla[a])
+        text22 = f1.render(f'{b[a]}: {self.d}', True, (255, 255, 255))
         return text22
 
 
@@ -98,10 +99,31 @@ while running:
     if event.type == pg.MOUSEBUTTONDOWN:
         if event.button == 1:
             x, y = pg.mouse.get_pos()
-            for i in range(0, 8):
-                if touchRect[i].collidepoint(x, y):
-                    te = Printed()
-                    text22 = te.qwe(i)
+            if touchRect[0].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(0)
+            elif touchRect[1].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(1)
+            elif touchRect[2].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(2)
+            elif touchRect[3].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(3)
+
+            elif touchRect[4].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(4)
+            elif touchRect[5].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(5)
+            elif touchRect[6].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(6)
+            elif touchRect[7].collidepoint(x, y):
+                te = Printed()
+                text22 = te.qwe(7)
 
     screen.blit(bg, (0, 0))
 
