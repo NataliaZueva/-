@@ -52,7 +52,10 @@ clock = pg.time.Clock()
 bg = pg.image.load('fon.png').convert()
 
 # Планеты - размер, отдаленность.....
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 2c78281 (Исправление зверушки)
 pla = file_read('Planes.txt')
 kk = []
 for i in pla:
@@ -81,7 +84,12 @@ class Printed:
         self.d = kk[2].angle_return()
 
     def qwe(self, a):
+<<<<<<< HEAD
         text22 = f1.render(f'{pla[a][0]}: {self.d}', True, (255, 255, 255))
+=======
+        b = ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+        text22 = f1.render(f'{b[a]}: {self.d}', True, (255, 255, 255))
+>>>>>>> parent of 2c78281 (Исправление зверушки)
         return text22
 
 
